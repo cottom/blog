@@ -1,0 +1,15 @@
+{
+  "moduleFileExtensions": [
+    "js"
+  ],
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/config/",
+    "/bin/"
+  ],
+  "testRegex": ".*\\.(spec)\\.js$",
+  "testEnvironment": "node"
+}

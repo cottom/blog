@@ -1,0 +1,10 @@
+mixin BlogItem(title, body, labels, pre, next, created_at, user)
+  div.blog-content
+    div.blog-title=title
+    div.blog-meta
+      i(class='cottom-iconfont cottom-icon-calendar2')=created_at
+      span.blog-label-container
+            each label in labels
+              a(href=`/label/${label.name}` class='blog-item__label-item cottom-iconfont cottom-icon-label_fill')=label.name
+    div.blog-body.markdown-body!=body
+    div.pre_next

@@ -1,0 +1,25 @@
+include common/header.pug
+include common/nav.pug
+include common/footer.pug
+
+
+<!DOCTYPE html>
+html(lang="en")
+  +header(pageTitle)
+  body
+    link(rel="stylesheet", href="/css/blog-archives.css")
+    main.main-body
+      +blogNav(navs, 'Archives', siteUrl)
+      div.main-body-layout
+        div.main-body-layout__left
+          each issues, key in archives
+            div.blog-archives-item
+              h2=key
+              ul.blog-archives-item__ul
+                each issue in issues
+                  li.blog-archives-item__li
+                    span.blog-archives-item__date=issue.created_at
+                    a(class='blog-archives-item__link' href=`/blog/${issue.formatterTitle}`)=issue.title
+        div.main-body-layout__right
+
+    +footer(siteUrl)

@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "plugins": ["node"],
+  "extends": "standard",
+  "env": {
+    "node": true,
+    "jest": true,
+    "es6": true
+  }
+}

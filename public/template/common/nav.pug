@@ -1,0 +1,10 @@
+mixin blogNav(navs, active, url)
+  div.blog-header
+    div.site-title
+      h1
+        a(href=`${url}`) Cottom's Blog
+    div.blog-nav
+      div.blog-nav__btns
+        each item in navs
+          a(class=`blog-nav__btn-item ${item.name==active && 'active'}` href=`${item.path}`)
+            i(class=`cottom-iconfont ${item.icon} blog-nav__btn-item__text`)=item.name

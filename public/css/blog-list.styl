@@ -1,0 +1,59 @@
+@import './_common'
+.list_main
+  display: flex
+
+.list__blog-main
+  width 75%
+  padding-right: 50px;
+  padding-top: 20px;
+
+.list__side
+  width: 25%
+
+.list__sidebar
+    border-left: 1px solid #ddd
+    padding-left: 35px
+    margin-top: 40px
+    padding-bottom: 20px
+    word-wrap: break-word
+
+.list-item
+  padding: 25px 0 15px
+  position relative
+  &__title
+    margin: 0
+    color: #555
+    text-align: left
+    font: bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif
+  &__date
+    font-size: 14px
+    color #999
+    margin 12px 0
+  &__read-more
+    position: absolute
+    right: 0
+    bottom: 0
+    color: #999
+    border: 1px solid #999
+    border-radius: 7px
+    padding-top: 2px
+    padding-bottom: 2px
+    padding-left: 10px
+    padding-right: 10px
+    cursor pointer
+    &:hover
+      color: #444
+      border-color: #444
+  &__label-item
+    margin-right: 6px
+    color: #999
+    &:hover
+      color: #444
+
+
+.list-item__content
+  color: #444
+  text-align: justify
+  word-break: normal
+  font-size: 15px
+  line-height: 1.77

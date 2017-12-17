@@ -1,0 +1,12 @@
+mixin listItem(item)
+  div.list-item
+    div
+      a(class='list-item__title' href=`/blog/${item.formatterTitle}`)  #{item.title}
+    div.list-item__date
+      i(class='cottom-iconfont cottom-icon-calendar2')=item.created_at
+    div.list-item__content!=item.body
+    div.list-item__labels
+      each label in item.labels
+        a(href=`/label/${label.name}` class='list-item__label-item cottom-iconfont cottom-icon-label_fill')=label.name
+    a(class='list-item__read-more' href=`/blog/${item.formatterTitle}`) more
+

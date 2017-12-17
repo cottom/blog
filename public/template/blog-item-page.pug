@@ -1,0 +1,22 @@
+include common/header.pug
+include common/nav.pug
+include common/blog-item.pug
+include common/footer.pug
+
+<!DOCTYPE html>
+html
+  +header(pageTitle)
+  body
+    link(rel="stylesheet", href="/css/blog-item.css")
+    link(rel="stylesheet", href="https://unpkg.com/highlight.js@9.12.0/styles/default.css")
+    link(rel="stylesheet", href="https://unpkg.com/github-markdown-css@2.9.0/github-markdown.css")
+    main.main-body
+      +blogNav(navs, 'Blog', siteUrl)
+      div.blog-item__layout
+        div.blog-item__layout-main
+          +BlogItem(title, body, labels, pre, next, created_at, user)
+        div.blog-item__layout-outline
+          ul
+            each item in outline
+              li!=item.html
+      +footer(siteUrl)

@@ -1,0 +1,10 @@
+include list-item
+include pagination
+mixin blogList(blogs, pageInfo)
+  div.list_main
+    div.list__blog-main
+      each item in blogs
+        +listItem(item)
+      +pagination(pageInfo)
+    div.list__side
+      div.list__sidebar

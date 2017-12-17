@@ -1,0 +1,15 @@
+include common/header.pug
+include common/nav.pug
+include common/blog-list.pug
+include common/footer.pug
+
+<!DOCTYPE html>
+html
+  +header(pageTitle)
+  body
+    link(rel="stylesheet", href="/css/blog-list.css")
+    main.main-body
+      +blogNav(navs, 'Blog', siteUrl)
+      +blogList(blogs, pagination)
+      +footer(siteUrl)
+
