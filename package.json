@@ -1,7 +1,7 @@
 {
   "name": "bg-maker",
   "version": "1.0.0",
-  "description": "",
+  "description": "personal blog code",
   "main": "index.js",
   "scripts": {
     "test": "jest --config .jestrc.json",
