@@ -10,13 +10,17 @@ html
     link(rel="stylesheet", href="/css/blog-item.css")
     link(rel="stylesheet", href="https://unpkg.com/highlight.js@9.12.0/styles/default.css")
     link(rel="stylesheet", href="https://unpkg.com/github-markdown-css@2.9.0/github-markdown.css")
+    link(rel="stylesheet", href="https://unpkg.com/gh-talk/dist/index.css")
     main.main-body
       +blogNav(navs, 'Blog', siteUrl)
       div.blog-item__layout
         div.blog-item__layout-main
-          +BlogItem(title, body, labels, pre, next, created_at, user)
+          +BlogItem(title, body, labels, pre, next, created_at, user, number)
         div.blog-item__layout-outline
           ul
             each item in outline
               li!=item.html
       +footer(siteUrl)
+    script(src="https://unpkg.com/gh-talk/dist/index.js")
+    script(src="/js/blog-item.js")
+

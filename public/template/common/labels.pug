@@ -1,0 +1,3 @@
+mixin issueLabels(labels, active)
+  each item in labels
+    a(class=`blog-label__label-item cottom-iconfont cottom-icon-label_fill ${active===item.name && 'active'}` href=`/label/${item.name}`)=item.name

@@ -10,11 +10,16 @@ html
   body
     link(rel="stylesheet", href="/css/blog-list.css")
     main.main-body
-      +blogNav(navs, 'Blog', siteUrl)
+      +blogNav(navs, '', siteUrl)
       div.main-body-layout
         div.main-body-layout__left
-          +blogList(blogs, pagination)
+          h2.blog-label__title=`label: ${active}`
+          ul.blog-label__issues-list
+            each item in issues
+              li
+                span=item.created_at
+                a(href=`/blog/${item.formatterTitle}` class='blog-label__title')=item.title
         div.main-body-layout__right.siderbar
           div.labels-container
-            +siderLabels(labels)
+            +siderLabels(labels, active)
       +footer(siteUrl)

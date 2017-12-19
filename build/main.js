@@ -12,9 +12,6 @@ const { format } = require('date-fns')
 const _format = v => v && format(new Date(v), 'YYYY-MM-DD')
 
 exports.buildHTML = async () => {
-  // log('to remove cache dist')
-  // rmDir(distDir)
-  // log('success remove dist')
   log('to fetch issues')
   const { data } = await listIssues()
   log('success fetch issues')

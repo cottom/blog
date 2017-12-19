@@ -32,7 +32,9 @@ gulp.task('build:css', () => {
 gulp.task('build:dev', (cb) => {
   runSequence('clean', ['build:css', 'build:js', 'build:html'], 'server')
 })
-
+gulp.task('build', () => {
+  runSequence('clean', ['build:css', 'build:js', 'build:html'])
+})
 gulp.task('server', () => {
   browserSync.init({
     server: {

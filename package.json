@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config .jestrc.json",
-    "build": "node ./bin/build",
+    "build": "gulp build",
+    "ci-build": "gulp build && ./git-page.sh",
     "dev": "gulp dev"
   },
   "engines": {

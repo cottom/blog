@@ -8,7 +8,7 @@ const { commonConfig, writeFile, LINK_SVG } = require('./util')
 const { siteUrl, siteTitle, PAGE_NUM, distDir } = config
 
 const buildSignIssue = issue => {
-  const { created_at, updated_at, title, body: _body, html_url, labels, formatterTitle } = issue
+  const { number, created_at, updated_at, title, body: _body, html_url, labels, formatterTitle } = issue
   const renderFn = pug.compileFile('./public/template/blog-item-page.pug', {})
   const renderer = new md.Renderer()
   const outline = []
@@ -42,7 +42,8 @@ const buildSignIssue = issue => {
     labels,
     title,
     outline,
-    ...commonConfig
+    ...commonConfig,
+    number
   })
   writeFile(`${distDir}/blog/${formatterTitle}/index.html`, content)
 }
@@ -62,9 +63,28 @@ const buildArchives = (issues = [], labels = []) => {
     archives,
     labels,
     ...commonConfig,
-    pageTitle: `${siteTitle}-Archives`
+    pageTitle: `Archives | ${siteTitle}`
   })
   writeFile(`${distDir}/archives/index.html`, content)
+}
+
+const buildLabelPages = (issues, labels) => {
+  const buildObj = labels.reduce((pre, cur) => {
+    const { name } = cur
+    pre[name] = issues.filter(issue => issue.labels.some(l => l.name === name))
+    return pre
+  }, {})
+  Object.keys(buildObj).forEach(name => {
+    const renderFn = pug.compileFile('./public/template/blog-labels.pug')
+    const content = renderFn({
+      active: name,
+      issues: buildObj[name],
+      labels,
+      ...commonConfig,
+      pageTitle: `label: ${name} | ${siteTitle}`
+    })
+    writeFile(`${distDir}/label/${name}/index.html`, content)
+  })
 }
 
 exports.buildListPages = issues => {
@@ -98,6 +118,7 @@ exports.buildListPages = issues => {
     let pageTitle = siteTitle
     if (index) pageTitle += ` - 第 ${index + 1} 页`
     return {
+      labels: allLabels,
       blogs: item,
       pageTitle,
       siteUrl,
@@ -119,4 +140,7 @@ exports.buildListPages = issues => {
   })
   // build archives page
   buildArchives(issues, allLabels)
+
+  // build label pages
+  buildLabelPages(issues, allLabels)
 }

@@ -2,6 +2,7 @@
 @import './_header.styl'
 html
   font-family: sans-serif
+  text-rendering: optimizespeed
 
 * {
   box-sizing: border-box
@@ -35,7 +36,7 @@ a
 #footer
   font-size: 12px
   margin-top: 50px
-  margin-bottom: 30px
+  padding-bottom: 30px
   text-align: center
 
 .blog-footer__source
@@ -45,6 +46,35 @@ a
 .main-body-layout
   display flex
   &__left
-    width 70%
+    width 75%
   &__right
-    width: 30%
+    width: 25%
+    margin-top: 30px
+    padding-left: 20px
+    border-left: solid 1px #ddd
+
+.blog-label__label-item
+  margin-right: 8px
+  padding: 2px 4px
+  &.active
+    border-radius: 14px
+    border: solid 1px #ddd
+
+.labels-container
+  line-height: 2
+
+.sider-item-title
+  color: #6E7173
+  line-height: 2.7
+  font-size: 16px;
+  border-bottom: 1px solid #ddd
+  display: block
+  font-weight: normal
+
+.backt-to-top
+  cursor pointer
+  font-size: 1.6rem
+  position: fixed
+  right: 50px
+  bottom: 50px
+  display: block

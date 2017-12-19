@@ -20,11 +20,6 @@ const commonConfig = {
       name: 'Archives',
       path: '/archives',
       icon: 'cottom-icon-menu'
-    },
-    {
-      name: 'About',
-      path: '/about',
-      icon: 'cottom-icon-timerauto'
     }
   ]
 }
@@ -32,7 +27,7 @@ const commonConfig = {
 exports.commonConfig = commonConfig
 
 exports.getConfig = () => {
-  const ciConfig = process.env.CI_BUILD ? getConfigFromENV() : require('../config/test.js')
+  const ciConfig = process.env.CIRCLECI ? getConfigFromENV() : require('../config/test.js')
   return {
     ...commonConfig,
     ...ciConfig
@@ -40,8 +35,8 @@ exports.getConfig = () => {
 }
 
 function getConfigFromENV () {
-  return {
-  }
+  const { Authorization, owner, repo } = process.env
+  return { Authorization, owner, repo }
 }
 
 exports.filterSelfIssue = issue => issue.author_association === 'OWNER' && !issue.pull_request

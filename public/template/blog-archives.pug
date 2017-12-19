@@ -1,7 +1,7 @@
 include common/header.pug
 include common/nav.pug
 include common/footer.pug
-
+include common/siderbarlabels.pug
 
 <!DOCTYPE html>
 html(lang="en")
@@ -21,5 +21,6 @@ html(lang="en")
                     span.blog-archives-item__date=issue.created_at
                     a(class='blog-archives-item__link' href=`/blog/${issue.formatterTitle}`)=issue.title
         div.main-body-layout__right
-
+          div.labels-container
+            +siderLabels(labels)
     +footer(siteUrl)
