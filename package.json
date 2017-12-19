@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --config .jestrc.json",
     "build": "gulp build",
-    "ci-build": "gulp build && ./git-page.sh",
+    "ci-build": "gulp build && sh ./git-page.sh",
     "dev": "gulp dev"
   },
   "engines": {

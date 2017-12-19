@@ -5,11 +5,11 @@ const md = require('marked')
 const config = require('./util').getConfig()
 const { commonConfig, writeFile, LINK_SVG } = require('./util')
 
-const { siteUrl, siteTitle, PAGE_NUM, distDir } = config
+const { siteUrl, siteTitle, PAGE_NUM, distDir, basedir } = config
 
 const buildSignIssue = issue => {
   const { number, created_at, updated_at, title, body: _body, html_url, labels, formatterTitle } = issue
-  const renderFn = pug.compileFile('./public/template/blog-item-page.pug', {})
+  const renderFn = pug.compileFile('./public/template/blog-item-page.pug', {basedir})
   const renderer = new md.Renderer()
   const outline = []
   renderer.heading = (text, level) => {
@@ -58,7 +58,7 @@ const buildArchives = (issues = [], labels = []) => {
     pre[key].push(cur)
     return pre
   }, {})
-  const renderFn = pug.compileFile('./public/template/blog-archives.pug')
+  const renderFn = pug.compileFile('./public/template/blog-archives.pug', {basedir})
   const content = renderFn({
     archives,
     labels,
@@ -75,7 +75,7 @@ const buildLabelPages = (issues, labels) => {
     return pre
   }, {})
   Object.keys(buildObj).forEach(name => {
-    const renderFn = pug.compileFile('./public/template/blog-labels.pug')
+    const renderFn = pug.compileFile('./public/template/blog-labels.pug', {basedir})
     const content = renderFn({
       active: name,
       issues: buildObj[name],
@@ -132,7 +132,7 @@ exports.buildListPages = issues => {
   })
   // build list page
   listPages.forEach((item, index) => {
-    const renderFn = pug.compileFile('./public/template/blog-page.pug', {})
+    const renderFn = pug.compileFile('./public/template/blog-page.pug', {basedir})
     const content = renderFn(item)
     const _path = `${distDir}/page/${index + 1}/index.html`
     writeFile(_path, content)

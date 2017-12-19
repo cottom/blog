@@ -10,6 +10,7 @@ const commonConfig = {
   siteTitle: 'cottom\'s blog',
   PAGE_NUM: 10,
   distDir: path.join(__dirname, '..', './dist'),
+  basedir: path.join(__dirname, '..'),
   navs: [
     {
       name: 'Blog',
