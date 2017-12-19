@@ -1,8 +1,5 @@
 const axios = require('axios')
-
-const config = require('./util').getConfig()
-
-const { owner, repo, Authorization } = config
+const { owner, repo, Authorization } = require('./util').getBuildConfig()
 
 const $http = axios.create({
   baseURL: 'https://api.github.com',

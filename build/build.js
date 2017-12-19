@@ -2,11 +2,11 @@ const pug = require('pug')
 const cheerio = require('cheerio')
 
 const md = require('marked')
-const config = require('./util').getConfig()
-const { commonConfig, writeFile, LINK_SVG } = require('./util')
+const config = require('../config')
+const { writeFile, LINK_SVG } = require('./util')
 
 const { siteUrl, siteTitle, PAGE_NUM, distDir, basedir } = config
-
+console.log(siteUrl, siteTitle, PAGE_NUM, distDir, basedir)
 const buildSignIssue = issue => {
   const { number, created_at, updated_at, title, body: _body, html_url, labels, formatterTitle } = issue
   const renderFn = pug.compileFile('./public/template/blog-item-page.pug', {basedir})
@@ -42,7 +42,7 @@ const buildSignIssue = issue => {
     labels,
     title,
     outline,
-    ...commonConfig,
+    ...config,
     number
   })
   writeFile(`${distDir}/blog/${formatterTitle}/index.html`, content)
@@ -58,11 +58,11 @@ const buildArchives = (issues = [], labels = []) => {
     pre[key].push(cur)
     return pre
   }, {})
-  const renderFn = pug.compileFile('./public/template/blog-archives.pug', {basedir})
+  const renderFn = pug.compileFile('./public/template/blog-archives.pug')
   const content = renderFn({
     archives,
     labels,
-    ...commonConfig,
+    ...config,
     pageTitle: `Archives | ${siteTitle}`
   })
   writeFile(`${distDir}/archives/index.html`, content)
@@ -75,12 +75,12 @@ const buildLabelPages = (issues, labels) => {
     return pre
   }, {})
   Object.keys(buildObj).forEach(name => {
-    const renderFn = pug.compileFile('./public/template/blog-labels.pug', {basedir})
+    const renderFn = pug.compileFile('./public/template/blog-labels.pug')
     const content = renderFn({
       active: name,
       issues: buildObj[name],
       labels,
-      ...commonConfig,
+      ...config,
       pageTitle: `label: ${name} | ${siteTitle}`
     })
     writeFile(`${distDir}/label/${name}/index.html`, content)
@@ -127,12 +127,12 @@ exports.buildListPages = issues => {
         pageIndex: index + 1,
         total: listPages.length
       },
-      ...commonConfig
+      ...config
     }
   })
   // build list page
   listPages.forEach((item, index) => {
-    const renderFn = pug.compileFile('./public/template/blog-page.pug', {basedir})
+    const renderFn = pug.compileFile('./public/template/blog-page.pug')
     const content = renderFn(item)
     const _path = `${distDir}/page/${index + 1}/index.html`
     writeFile(_path, content)

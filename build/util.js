@@ -3,36 +3,8 @@ const fs = require('fs')
 const rimraf = require('rimraf')
 const shell = require('shelljs')
 
-const commonConfig = {
-  devHost: 'localhost',
-  devPort: '4312',
-  siteUrl: 'https://blog.cottom.cc',
-  siteTitle: 'cottom\'s blog',
-  PAGE_NUM: 10,
-  distDir: path.join(__dirname, '..', './dist'),
-  basedir: path.join(__dirname, '..'),
-  navs: [
-    {
-      name: 'Blog',
-      path: '/',
-      icon: 'cottom-icon-home'
-    },
-    {
-      name: 'Archives',
-      path: '/archives',
-      icon: 'cottom-icon-menu'
-    }
-  ]
-}
-
-exports.commonConfig = commonConfig
-
-exports.getConfig = () => {
-  const ciConfig = process.env.CIRCLECI ? getConfigFromENV() : require('../config/test.js')
-  return {
-    ...commonConfig,
-    ...ciConfig
-  }
+exports.getBuildConfig = () => {
+  return process.env.CIRCLECI ? getConfigFromENV() : require('../config/test.js')
 }
 
 function getConfigFromENV () {
@@ -51,6 +23,7 @@ exports.createEmptyFile = filePath => {
 exports.writeFile = (_path, content) => {
   const dirName = path.dirname(_path)
   if (!fs.existsSync(dirName)) shell.mkdir('-p', dirName)
+  console.log(_path)
   fs.writeFileSync(_path, content)
 }
 
